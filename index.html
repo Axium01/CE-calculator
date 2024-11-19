@@ -32,7 +32,10 @@
                 while (loopNumbers == "y") { // loop for repeated number input
                     userInput = prompt("You've entered " + userNumbers.length + " numbers. \nEnter another number? (y/n)");
                     if (userInput == "y") {
-                        userNumbers.push(prompt("Please enter another number.");
+                        while (isNaN(userInput) || userInput === "") {
+                            userInput = prompt("The input given is invalid. \nPlease enter a number.");
+                        }
+                        userNumbers.push(userInput);
                     } else if (userInput == "n") {
                         loopNumbers = "n";
                         // do nothing since we'll break out of the loop

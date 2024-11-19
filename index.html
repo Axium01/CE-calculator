@@ -12,30 +12,82 @@
             let userInput = "";
             let userNumbers = [];
             let userOperation = "";
+            let incorrectDivisionFlag = false;
+            let finalCalculation = 0;
             let loopCalculator = "y"; // used to keep doing calculations
             isNaN(x)
             userInput = prompt("Welcome to the calculator.\nPlease enter a number."); // first user input
             while (isNaN(userInput) || userInput === "") {
-                loopNumbers = prompt("The input given is invalid. \nPlease enter a number.");
+                userInput = prompt("The input given is invalid. \nPlease enter a number.");
             }
             userNumbers.push(userInput);
             userInput = prompt("You entered " + userNumbers[0] + ". Please enter another number."); // second user input.
             while (isNaN(userInput) || userInput === "") {
-                loopNumbers = prompt("The input given is invalid. \nPlease enter a number.");
+                userInput = prompt("The input given is invalid. \nPlease enter a number.");
             }
             userNumbers.push(userInput);
             // 2 numbers are needed for userNumbers at a minimum.
-            while (loopCalculator == "y") {
+            while (loopCalculator == "y") { // loop for calculator
                 loopNumbers = "y";
-                while (loopNumbers == "y") {
-                    loopNumbers = prompt("You've entered " + userNumbers.length + " numbers. \nEnter another number? (y/n)");
-                    if (loopNumbers == "y") {
+                while (loopNumbers == "y") { // loop for repeated number input
+                    userInput = prompt("You've entered " + userNumbers.length + " numbers. \nEnter another number? (y/n)");
+                    if (userInput == "y") {
                         userNumbers.push(prompt("Please enter another number.");
-                    } else if (loopNumbers == "n") {
+                    } else if (userInput == "n") {
+                        loopNumbers = "n";
                         // do nothing since we'll break out of the loop
                     } else {
-                        loopNumbers = prompt("The input given is invalid. \nEnter another number? (y/n)");
+                        userInput = prompt("The input given is invalid. \nEnter another number? (y/n)");
                     }
+                }
+                userOperation = ""; // reset operation
+                userInput = prompt("What operation would you like to perform?\nAvailable operations: + | - | * | /");
+                // if the input isnt valid, make them redo it until it is
+                while ((userInput != "+") && (userInput != "-") && (userInput != "*") && (userInput != "/")) {
+                    userInput = prompt("Your operation was invalid. Please use one of the following operations below.\nAvailable operations: + | - | * | /");
+                }
+                userOperation = userInput;
+                if (userInput == "+") {
+                    finalCalculation = userNumbers[0];
+                    for (let i = 1; i < userNumbers.length; i++) {
+                        finalCalculation += userNumbers[i];
+                    }
+                } else if (userInput == "-") {
+                    finalCalculation = userNumbers[0];
+                    for (let i = 1; i < userNumbers.length; i++) {
+                        finalCalculation -= userNumbers[i];
+                    }
+                } else if (userInput == "*") {
+                    finalCalculation = userNumbers[0];
+                    for (let i = 1; i < userNumbers.length; i++) {
+                        finalCalculation *= userNumbers[i];
+                    }
+                } else if (userInput == "/") {
+                    if (userNumbers.length <= 2) {
+                        finalCalculation = userNumbers[0];
+                        for (let i = 1; i < userNumbers.length; i++) {
+                            finalCalculation /= userNumbers[i];
+                        }
+                    } else {
+                        incorrectDivisionFlag = true;
+                    }
+                } else { // final catch
+                    // this shouldn't happen
+                }
+                if (incorrectDivisionFlag == false)
+                    userInput = prompt("You entered " + userNumbers.length + " numbers. Your answer is " + finalCalculation
+                                       + ". Would you like to perform another calculation? (y/n)")
+                } else {
+                    userInput = prompt("The calculation could not be done because more than 2 numbers were entered while doing a division operation." 
+                                       + "\nWould you like to perform another calculation? (y/n)");
+                }
+                while (userInput != "y" && userInput != "n") {
+                    userInput = prompt("The given input was invalid.\nWould you like to perform another calculation? (y/n)");
+                }
+                if (userInput == "n") {
+                    loopCalculator == "n";
+                } else {
+                    // nothing done.
                 }
             }
             

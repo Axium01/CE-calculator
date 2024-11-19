@@ -14,30 +14,37 @@
             let userOperation = "";
             let incorrectDivisionFlag = false;
             let finalCalculation = 0;
-            let loopCalculator = "y"; // used to keep doing calculations
-            userInput = prompt("Welcome to the calculator.\nPlease enter a number."); // first user input
-            while (isNaN(userInput) || userInput === "") {
-                userInput = prompt("The input given is invalid. \nPlease enter a number.");
-            }
-            userNumbers.push(userInput);
-            userInput = prompt("You entered " + userNumbers[0] + ". Please enter another number."); // second user input.
-            while (isNaN(userInput) || userInput === "") {
-                userInput = prompt("The input given is invalid. \nPlease enter a number.");
-            }
-            userNumbers.push(userInput);
-            // 2 numbers are needed for userNumbers at a minimum.
-            while (loopCalculator == "y") { // loop for calculator
+            let loopCalculator = true; // used to keep doing calculations
+            
+            while (loopCalculator == true) { // loop for calculator
+                incorrectDivisionFlag = false; // reset flag
+                userNumbers = []; // empty array.
+                userInput = prompt("Welcome to the calculator.\nPlease enter a number."); // first user input
+                while (isNaN(userInput) || userInput === "") {
+                    userInput = prompt("The input given is invalid. \nPlease enter a number.");
+                }
+                userNumbers.push(userInput);
+                userInput = prompt("You entered " + userNumbers[0] + ". Please enter another number."); // second user input.
+                while (isNaN(userInput) || userInput === "") {
+                    userInput = prompt("The input given is invalid. \nPlease enter a number.");
+                }
+                userNumbers.push(userInput);
+                // 2 numbers are needed for userNumbers at a minimum.
                 loopNumbers = "y";
                 while (loopNumbers == "y") { // loop for repeated number input
                     userInput = prompt("You've entered " + userNumbers.length + " numbers. \nEnter another number? (y/n)");
+                    while (userInput != "y" && userInput != "n") {
+                        userInput = prompt("The given input was invalid.\nWould you like to enter another number? (y/n)");
+                    }
                     if (userInput == "y") {
+                        userInput = prompt("Please enter another number.");
                         while (isNaN(userInput) || userInput === "") {
                             userInput = prompt("The input given is invalid. \nPlease enter a number.");
                         }
                         userNumbers.push(userInput);
                     } else if (userInput == "n") {
                         loopNumbers = "n";
-                        // do nothing since we'll break out of the loop
+                        // do nothing else since we'll break out of the loop
                     } else {
                         userInput = prompt("The input given is invalid. \nEnter another number? (y/n)");
                     }
@@ -50,25 +57,25 @@
                 }
                 userOperation = userInput;
                 if (userInput == "+") {
-                    finalCalculation = userNumbers[0];
+                    finalCalculation = Number(userNumbers[0]);
                     for (let i = 1; i < userNumbers.length; i++) {
-                        finalCalculation += userNumbers[i];
+                        finalCalculation += Number(userNumbers[i]);
                     }
                 } else if (userInput == "-") {
-                    finalCalculation = userNumbers[0];
+                    finalCalculation = Number(userNumbers[0]);
                     for (let i = 1; i < userNumbers.length; i++) {
-                        finalCalculation -= userNumbers[i];
+                        finalCalculation -= Number(userNumbers[i]);
                     }
                 } else if (userInput == "*") {
-                    finalCalculation = userNumbers[0];
+                    finalCalculation = Number(userNumbers[0]);
                     for (let i = 1; i < userNumbers.length; i++) {
-                        finalCalculation *= userNumbers[i];
+                        finalCalculation *= Number(userNumbers[i]);
                     }
                 } else if (userInput == "/") {
                     if (userNumbers.length <= 2) {
-                        finalCalculation = userNumbers[0];
+                        finalCalculation = Number(userNumbers[0]);
                         for (let i = 1; i < userNumbers.length; i++) {
-                            finalCalculation /= userNumbers[i];
+                            finalCalculation /= Number(userNumbers[i]);
                         }
                     } else {
                         incorrectDivisionFlag = true;
@@ -87,11 +94,15 @@
                     userInput = prompt("The given input was invalid.\nWould you like to perform another calculation? (y/n)");
                 }
                 if (userInput == "n") {
-                    loopCalculator == "n";
+                    loopCalculator = false;
+                    console.log("DEBUG: user left calculator");
                 } else {
+                    userInput = ""; // empty user input.
                     // nothing done.
+                    console.log("DEBUG: user did not leave calculator");
                 }
             }
+            alert("Thank you for using this calculator!");
             
         </script>
     </body>

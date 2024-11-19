@@ -3,14 +3,42 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title></title>
-        <meta name="description" content="">
+        <title>CE_calculator</title>
+        <meta name="author" content="Milo Wearn">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        
-        <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
-        <p>Hello world!</p>
+        <script>
+            let userInput = "";
+            let userNumbers = [];
+            let userOperation = "";
+            let loopCalculator = "y"; // used to keep doing calculations
+            isNaN(x)
+            userInput = prompt("Welcome to the calculator.\nPlease enter a number."); // first user input
+            while (isNaN(userInput) || userInput === "") {
+                loopNumbers = prompt("The input given is invalid. \nPlease enter a number.");
+            }
+            userNumbers.push(userInput);
+            userInput = prompt("You entered " + userNumbers[0] + ". Please enter another number."); // second user input.
+            while (isNaN(userInput) || userInput === "") {
+                loopNumbers = prompt("The input given is invalid. \nPlease enter a number.");
+            }
+            userNumbers.push(userInput);
+            // 2 numbers are needed for userNumbers at a minimum.
+            while (loopCalculator == "y") {
+                loopNumbers = "y";
+                while (loopNumbers == "y") {
+                    loopNumbers = prompt("You've entered " + userNumbers.length + " numbers. \nEnter another number? (y/n)");
+                    if (loopNumbers == "y") {
+                        userNumbers.push(prompt("Please enter another number.");
+                    } else if (loopNumbers == "n") {
+                        // do nothing since we'll break out of the loop
+                    } else {
+                        loopNumbers = prompt("The input given is invalid. \nEnter another number? (y/n)");
+                    }
+                }
+            }
+            
+        </script>
     </body>
 </html>
